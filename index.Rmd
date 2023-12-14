@@ -1,7 +1,7 @@
 ---
 title: "Gov 50 Final Project"
 author: "David Hacker"
-description: "An Analysis of Urbanization and Election Denial in the United States"
+description: "Does Urbanization Influence Denial of the 2020 Election?"
 output:
   distill::distill_article:
     self_contained: false
@@ -11,11 +11,14 @@ output:
 
 ## Introduction 
   
-In April 2020, FiveThirtyEight published an [article](https://fivethirtyeight.com/features/how-urban-or-rural-is-your-state-and-what-does-that-mean-for-the-2020-election/ ) analyzing how urbanization in a state might be able to predict its vote in the 2020 presidential election. The article makes the claim that high urbanization is a good predictor for voting Democratic, and that "these patterns hold up even after accounting for other important political predictors like race or gender." After Joe Biden's victory, Donald Trump began to make unprecedented and baseless claims that the election had been fradulent and stolen. Shockingly, many prominent figures in the Republican party embraced this position, and in 2022, FiveThirtyEight published an [additional report](https://projects.fivethirtyeight.com/republicans-trump-election-fraud/) on which states had the most election deniers on the midterm ballots. A natural question to ask is whether the level of urbanization in a state or district could predict whether the Republican party nominated an election denier in 2022: since notions like election denial evoke thoughts of big, scary government, and people disconnected from government processes, I 
+In April 2020, FiveThirtyEight published an [article](https://fivethirtyeight.com/features/how-urban-or-rural-is-your-state-and-what-does-that-mean-for-the-2020-election/ ) analyzing how urbanization might be able to predict a state's vote in the 2020 presidential election. The article made the claim that high urbanization is a good predictor for voting Democrat, and that "these patterns hold up even after accounting for other important political predictors like race or gender." After Joe Biden's victory, Donald Trump began to make unprecedented and baseless claims that the election had been fradulent and stolen. Shockingly, many prominent figures in the Republican party embraced this position, and in 2022, FiveThirtyEight published an [additional report](https://projects.fivethirtyeight.com/republicans-trump-election-fraud/) on which states had the most election deniers on their midterm ballots. A natural question to ask is whether the level of urbanization in a state or district could predict whether they nominated an election denier in 2022. Because notions like election denial often come from people who fear big, scary government, and who would perhaps be less connected to government structures, I believe that areas with lower urbanization are more likely to nominate candidates that deny the 2020 election. An important caveat here is that, as FiveThirtyEight's report shows, urbanization is already very negatively correlated with Republican support. Thus, there is an obvious confounder: less urban areas are already far-right. Nevertheless, I hypothesize that even when you account for baseline Republican support, less urban areas will still be more likely to support election-denying candidates.
 
 ## Data 
   
-This analysis uses three different datasets, all of which were compiled by FiveThirtyEight. The first is a  [dataset](https://github.com/fivethirtyeight/data/tree/master/urbanization-index) of urbanization indices for states and districts, computed by FiveThirtyEight from Census Data. FiveThirtyEight computes urbanization index as the average natural logarithm of the number of people living in a five mile radius of each census tract. Next, the [dataset](https://github.com/fivethirtyeight/data/tree/master/election-deniers) of "Election Deniers" contains information about every Republican candidate that ran in the 2022 midterm elections, and their stance on the 2020 election, which can be any of "Fully accepted", "Accepted with reservations", "Avoided answering", "Raised questions", "No comment", 
+This analysis uses three different datasets, all of which were compiled by FiveThirtyEight. The first is a  [dataset](https://github.com/fivethirtyeight/data/tree/master/urbanization-index) of urbanization indices for states and districts, computed by FiveThirtyEight from Census Data. The urbanization index is calculated as the average natural logarithm of the number of people living in a five mile radius of each census tract. Next, the [dataset](https://github.com/fivethirtyeight/data/tree/master/election-deniers) "Election Deniers" contains information about every Republican candidate that ran in the 2022 midterm elections, and their stance on the 2020 election, which could be any of "Fully accepted", "Accepted with reservations", "Raised questions", "Fully denied", "avoided Answering", or "No comment". These stances were collected through news reporting and independent candidate outreach by FiveThirtyEight.
+
+Candidates running on a "statewide level" could either be running for Governor, Senator, Secretary of State, or Attorney General. Because these positions do not hold elections every two years, and there are multiple different positions, it is not obvious how one should define a state as having nominated an election. I chose to follow FiveThirtyEight's analysis in their 2022 article: if a state had at least one candidate for one of those four positions that "Fully denied" the 2020 election, then I marked that state as having a "statewide election denier". This plot shows which states satisfied this criteria:
+
 ```{r}
 library(tidyverse)
 library(usmap)
@@ -31,8 +34,8 @@ states_with_statewide_deniers <- election_deniers |> group_by(State) |>
   filter(Office %in% c('Senator', 'Governor', 'Secretary of state', 'Attorney general')) |>
   filter(Stance == "Fully denied") |> summarize()
 urb_index <- urb_index |> mutate(
-  statewide_denier = if_else(state %in% states_with_statewide_deniers$State, 1, 0)
-)
+  statewide_denier = if_else(state %in% states_with_statewide_deniers$State, "Yes", "No")
+) |> mutate(statewide_denier_num = if_else(state %in% states_with_statewide_deniers$State, 1, 0))
 election_deniers <- election_deniers |> mutate(numeric_denial = case_when(
   Stance == "Fully denied" ~ 2,
   Stance == "Raised questions" ~ 1,
@@ -55,53 +58,119 @@ by_district <- merge(by_district, partisan_lean_districts, by="ezcode")
 urb_index <- merge(urb_index, partisan_lean, by="state")
 statewide_data <- urb_index
 district_data <- by_district
-
-plot_usmap(data = statewide_data, values = "statewide_denier", color = "black") + 
-  scale_fill_continuous(
-    low = "white", high = "red", name = "Population (2015)", label = scales::comma
-  ) + theme(legend.position = "right")
 ```
 ```{r}
-lm(statewide_denier ~ urbanindex, data=statewide_data) |> summary()
-lm(statewide_denier ~ urbanindex + lean, data=statewide_data) |> summary()
-lm(numeric_denial ~ urbanindex, data=district_data) |> summary()
-lm(numeric_denial ~ urbanindex + distlean, data=district_data) |> summary()
-lm(flat_denial ~ urbanindex, data=district_data) |> summary()
-lm(flat_denial ~ urbanindex + distlean, data=district_data) |> summary()
+plot_usmap(data = statewide_data, values = "statewide_denier", color = "grey") + 
+  theme(panel.background = element_rect(colour = "black")) +
+  scale_fill_manual(values = c('Yes' = "red", "No" = "white"), name = "Statewide Denier") + 
+  theme(legend.position = "right") + labs(title="States that nominated election deniers for the 2020 midterms")
 ```
+
+Districts were easier to analyze since every district had exactly one representative running in the midterms. I broke the district data down in two ways: either measuring directly whether a representative fully denied the election, or on a five-point scale that depends on how strongly the candidate answered, where "Fully denied" is 2 and "Fully accepted" is -2.
+
+Finally, to analyze the confounder of baseline Republican support, I included a [third dataset](https://github.com/fivethirtyeight/data/blob/master/partisan-lean/README.md) that has the "partisan lean" of every US state/district, which was calculated as the difference between a region's vote and the national average over various recent elections.
+
+The goal of the study is, in each of these three cases, to try to identify a causal relationship between urbanization and a state's support for election-denying candidates. Note that this is a cross-sectional study, as we are examining simultaneous facets of a single population (urban density and candidate support).
+
+
+## Results
+
+We begin by running the three linear regressions: Statewide candidate denial vs urbanization:
+
+```{r}
+lm1 <- lm(statewide_denier_num ~ urbanindex, data = statewide_data)
+lm2 <- lm(flat_denial ~ urbanindex, data = district_data)
+lm3 <- lm(numeric_denial ~ urbanindex, data = district_data)
+
+varnames <- c("(Intercept)" = "Intercept",
+              "urbanindex" = "Urban Index")
+
+modelsummary::modelsummary(lm1, statistic = "p.value", 
+                           gof_map = c("r.squared", "adj.r.squared"),
+                           coef_map = varnames)
+```
+
+
+House candidate election denial by urbanization:
+
+```{r}
+modelsummary::modelsummary(lm2, statistic = "p.value", 
+                           gof_map = c("r.squared", "adj.r.squared"),
+                           coef_map = varnames)
+```
+
+
+And House candidate election denial by urbanization, on a five-point scale:
+
+
+```{r}
+modelsummary::modelsummary(lm3, statistic = "p.value", 
+                           gof_map = c("r.squared", "adj.r.squared"),
+                           coef_map = varnames)
+```
+
+The first regression shows that states who nominated statewide election deniers had, on average, urbanization indices 0.011 points higher than states who did not. However, the p-value for this coefficient is very high, and it appears that there is no statistically significant link between urbanization and support for candidates who deny the 2020 election. This is possibly due to the crude metric I used to assess "statewide election denial" (nomination of any candidate for one of four offices that denies the election). However, for both of the district-wide regressions, the p-value is quite small. Specifically, the second regression found that districts whose representative nominee flatly denies the election have urban indices that are -0.138 lower on average, and the third regression found that for every point increase in urbanization, there is a -0.081 decrease on the 5-point categorical scale of election denial. Thus, it appears at first glance that there is indeed a statistically significant negative link between urbanization and support for election-denying candidates on the district level. These plots visually corroborate the correlation on a district-wide, but not state-wide, level.
+
 ```{r}
 scatter1 <- statewide_data |>
-  ggplot(aes(x = urbanindex, y = statewide_denier)) +
+  ggplot(aes(x = urbanindex, y = statewide_denier_num)) +
   geom_point() +
   geom_smooth(method='lm', formula= y~x) +
   labs(
-    x = "Unemployment Rates in WV Counties (2018)",
-    y = "Percentage Population Changes in WV Counties (2019)",
-    title = "West Virginia County Population Changes in 2019\nvs. West Virginia County Unemployment Rates in 2018",
-    caption = "Sources: United States Census Bureau Annual Resident\nPopulation Estimates for States and Counties (2021);\nAppalachian Regional Commission (2022)"
-  )
+    x = "Urbanization Index",
+    y = "",
+    title = "Statewide Candidate Election Denial by Urbanization",
+    caption = ""
+  ) + scale_y_continuous(breaks=c(0, 1), labels=c('No Election Denier', 'Election Denier'))
 scatter2 <- district_data |>
   ggplot(aes(x = urbanindex, y = numeric_denial)) +
   geom_point() +
   geom_smooth(method='lm', formula= y~x) +
   labs(
-    x = "Unemployment Rates in WV Counties (2018)",
-    y = "Percentage Population Changes in WV Counties (2019)",
-    title = "West Virginia County Population Changes in 2019\nvs. West Virginia County Unemployment Rates in 2018",
-    caption = "Sources: United States Census Bureau Annual Resident\nPopulation Estimates for States and Counties (2021);\nAppalachian Regional Commission (2022)"
-)
+    x = "Urbanization Index",
+    y = "",
+    title = "Republican-House Candidate election denial by urbanization",
+) + scale_y_continuous(breaks=c(-2, -1, 0, 1, 2), 
+                       labels=c('Fully accepted ',
+                                'Accepted with reservations',
+                                'No comment/Avoided question',
+                                'Raised questions',
+                                'Fully denied'))
 scatter3 <- district_data |>
   ggplot(aes(x = urbanindex, y = flat_denial)) +
   geom_point() +
   geom_smooth(method='lm', formula= y~x) +
   labs(
-    x = "Unemployment Rates in WV Counties (2018)",
-    y = "Percentage Population Changes in WV Counties (2019)",
-    title = "West Virginia County Population Changes in 2019\nvs. West Virginia County Unemployment Rates in 2018",
-    caption = "Sources: United States Census Bureau Annual Resident\nPopulation Estimates for States and Counties (2021);\nAppalachian Regional Commission (2022)"
-)
+    x = "Urbanization Index",
+    y = "",
+    title = "Republican House candidate election denial by urbanization"
+) + scale_y_continuous(breaks=c(0, 1), labels=c('Other', 'Fully denied'))
 scatter1
 scatter2
 scatter3
-
 ```
+
+Despite the promising nature of these results, we are still unsure if these effects are causal. Remembering the possible confounder of partisan lean, let's see what happens when we perform a multiple regression on the district data, accounting for lean:
+
+```{r}
+lm4 <- lm(numeric_denial ~ urbanindex + distlean, data=district_data)
+lm5 <- lm(flat_denial ~ urbanindex + distlean, data=district_data)
+
+varnames <- c("(Intercept)" = "Intercept",
+              "urbanindex" = "Urban Index",
+              "distlean" = "Partisan Lean")
+
+modelsummary::modelsummary(lm4, statistic = "p.value", 
+                           gof_map = c("r.squared", "adj.r.squared"),
+                           coef_map = varnames)
+modelsummary::modelsummary(lm5, statistic = "p.value", 
+                           gof_map = c("r.squared", "adj.r.squared"),
+                           coef_map = varnames)
+```
+
+Indeed, the negative correlation between Partisan Lean and Urban Index shines through, and in both cases, the p-value for the coefficient of Urban Index rises above 0.05. It appears that there is actually no causal link between urbanization and support for election denying candidates. Therefore, I am **unable to reject the null hypothesis**.
+
+## Conclusion
+
+In this analysis, I found that highly urban districts were significantly less likely to nominate election-denying Republicans to the House of Representatives in 2022. However, I was unable to demonstrate a causal link, and in fact was able to essentially reject the notion of causality by accounting for partisan lean in a multiple regression. I did not find a baseline statistical link on a statewide level, but it is possible one exists if you change how statewide urbanization or statewide election denial is measured, and perhaps there is even a causal link in this case. This could be an area for future research, but given what I saw on the district level, I am doubtful that any causal link would be identified. Future exploration should probably focus on factors other than urbanization to causually explain election denial.
+
