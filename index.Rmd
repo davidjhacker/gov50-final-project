@@ -1,7 +1,7 @@
 ---
 title: "Gov 50 Final Project"
 author: "David Hacker"
-description: "Let's see where this goes"
+description: "An Analysis of Urbanization and Election Denial in the United States"
 output:
   distill::distill_article:
     self_contained: false
@@ -9,7 +9,99 @@ output:
 
 
 
-## Project thoughts
+## Introduction 
+  
+In April 2020, FiveThirtyEight published an [article](https://fivethirtyeight.com/features/how-urban-or-rural-is-your-state-and-what-does-that-mean-for-the-2020-election/ ) analyzing how urbanization in a state might be able to predict its vote in the 2020 presidential election. The article makes the claim that high urbanization is a good predictor for voting Democratic, and that "these patterns hold up even after accounting for other important political predictors like race or gender." After Joe Biden's victory, Donald Trump began to make unprecedented and baseless claims that the election had been fradulent and stolen. Shockingly, many prominent figures in the Republican party embraced this position, and in 2022, FiveThirtyEight published an [additional report](https://projects.fivethirtyeight.com/republicans-trump-election-fraud/) on which states had the most election deniers on the midterm ballots. A natural question to ask is whether the level of urbanization in a state or district could predict whether the Republican party nominated an election denier in 2022: since notions like election denial evoke thoughts of big, scary government, and people disconnected from government processes, I 
 
-I am interested in exploring data related to voting patterns, voter registration,
-the electoral college, voter id; I'm not sure exactly but you can probably see a pattern here.
+## Data 
+  
+This analysis uses three different datasets, all of which were compiled by FiveThirtyEight. The first is a  [dataset](https://github.com/fivethirtyeight/data/tree/master/urbanization-index) of urbanization indices for states and districts, computed by FiveThirtyEight from Census Data. FiveThirtyEight computes urbanization index as the average natural logarithm of the number of people living in a five mile radius of each census tract. Next, the [dataset](https://github.com/fivethirtyeight/data/tree/master/election-deniers) of "Election Deniers" contains information about every Republican candidate that ran in the 2022 midterm elections, and their stance on the 2020 election, which can be any of "Fully accepted", "Accepted with reservations", "Avoided answering", "Raised questions", "No comment", 
+```{r}
+library(tidyverse)
+library(usmap)
+
+urb_index <- read_csv('data/urbanization-state.csv')
+district_urb_index <- read_csv('data/urbanization-index-2022.csv')
+election_deniers <- read_csv('data/fivethirtyeight_election_deniers.csv')
+partisan_lean <- read_csv('data/fivethirtyeight_partisan_lean_STATES.csv') |>
+  rename("lean" = "2022")
+partisan_lean_districts <- read_csv('data/fivethirtyeight_partisan_lean_DISTRICTS.csv') |>
+  rename("distlean" = "2022", "ezcode" = "district")
+states_with_statewide_deniers <- election_deniers |> group_by(State) |>
+  filter(Office %in% c('Senator', 'Governor', 'Secretary of state', 'Attorney general')) |>
+  filter(Stance == "Fully denied") |> summarize()
+urb_index <- urb_index |> mutate(
+  statewide_denier = if_else(state %in% states_with_statewide_deniers$State, 1, 0)
+)
+election_deniers <- election_deniers |> mutate(numeric_denial = case_when(
+  Stance == "Fully denied" ~ 2,
+  Stance == "Raised questions" ~ 1,
+  Stance == "Accepted with reservations" ~ -1,
+  Stance == "Fully accepted" ~ -2,
+  T ~ 0
+))
+election_deniers <- election_deniers |> mutate(flat_denial = case_when(
+  Stance == "Fully denied" ~ 1,
+  T ~ 0
+))
+election_deniers <- election_deniers |> 
+  mutate(short_state = state.abb[match(State,state.name)]) |>
+  mutate(ezcode = paste(short_state, '-', District, sep="")) |>
+  mutate(stcd = if_else(as.integer(District) < 10, 
+                        paste(short_state, '-0', District, sep=""),
+                        paste(short_state, '-', District, sep=""))) 
+by_district <- merge(election_deniers, district_urb_index, by="stcd")
+by_district <- merge(by_district, partisan_lean_districts, by="ezcode")
+urb_index <- merge(urb_index, partisan_lean, by="state")
+statewide_data <- urb_index
+district_data <- by_district
+
+plot_usmap(data = statewide_data, values = "statewide_denier", color = "black") + 
+  scale_fill_continuous(
+    low = "white", high = "red", name = "Population (2015)", label = scales::comma
+  ) + theme(legend.position = "right")
+```
+```{r}
+lm(statewide_denier ~ urbanindex, data=statewide_data) |> summary()
+lm(statewide_denier ~ urbanindex + lean, data=statewide_data) |> summary()
+lm(numeric_denial ~ urbanindex, data=district_data) |> summary()
+lm(numeric_denial ~ urbanindex + distlean, data=district_data) |> summary()
+lm(flat_denial ~ urbanindex, data=district_data) |> summary()
+lm(flat_denial ~ urbanindex + distlean, data=district_data) |> summary()
+```
+```{r}
+scatter1 <- statewide_data |>
+  ggplot(aes(x = urbanindex, y = statewide_denier)) +
+  geom_point() +
+  geom_smooth(method='lm', formula= y~x) +
+  labs(
+    x = "Unemployment Rates in WV Counties (2018)",
+    y = "Percentage Population Changes in WV Counties (2019)",
+    title = "West Virginia County Population Changes in 2019\nvs. West Virginia County Unemployment Rates in 2018",
+    caption = "Sources: United States Census Bureau Annual Resident\nPopulation Estimates for States and Counties (2021);\nAppalachian Regional Commission (2022)"
+  )
+scatter2 <- district_data |>
+  ggplot(aes(x = urbanindex, y = numeric_denial)) +
+  geom_point() +
+  geom_smooth(method='lm', formula= y~x) +
+  labs(
+    x = "Unemployment Rates in WV Counties (2018)",
+    y = "Percentage Population Changes in WV Counties (2019)",
+    title = "West Virginia County Population Changes in 2019\nvs. West Virginia County Unemployment Rates in 2018",
+    caption = "Sources: United States Census Bureau Annual Resident\nPopulation Estimates for States and Counties (2021);\nAppalachian Regional Commission (2022)"
+)
+scatter3 <- district_data |>
+  ggplot(aes(x = urbanindex, y = flat_denial)) +
+  geom_point() +
+  geom_smooth(method='lm', formula= y~x) +
+  labs(
+    x = "Unemployment Rates in WV Counties (2018)",
+    y = "Percentage Population Changes in WV Counties (2019)",
+    title = "West Virginia County Population Changes in 2019\nvs. West Virginia County Unemployment Rates in 2018",
+    caption = "Sources: United States Census Bureau Annual Resident\nPopulation Estimates for States and Counties (2021);\nAppalachian Regional Commission (2022)"
+)
+scatter1
+scatter2
+scatter3
+
+```

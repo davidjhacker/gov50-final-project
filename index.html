@@ -90,7 +90,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
   <title>Gov 50 Final Project</title>
 
-  <meta property="description" itemprop="description" content="Let&#39;s see where this goes"/>
+  <meta property="description" itemprop="description" content="An Analysis of Urbanization and Election Denial in the United States"/>
 
 
   <meta name="article:author" content="David Hacker"/>
@@ -98,24 +98,24 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="Gov 50 Final Project"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Let&#39;s see where this goes"/>
+  <meta property="og:description" content="An Analysis of Urbanization and Election Denial in the United States"/>
   <meta property="og:locale" content="en_US"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="Gov 50 Final Project"/>
-  <meta property="twitter:description" content="Let&#39;s see where this goes"/>
+  <meta property="twitter:description" content="An Analysis of Urbanization and Election Denial in the United States"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","author","description","output"]}},"value":[{"type":"character","attributes":{},"value":["Gov 50 Final Project"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["David Hacker"]}]}]},{"type":"character","attributes":{},"value":["Let's see where this goes"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","author","description","output"]}},"value":[{"type":"character","attributes":{},"value":["Gov 50 Final Project"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["David Hacker"]}]}]},{"type":"character","attributes":{},"value":["An Analysis of Urbanization and Election Denial in the United States"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/header-attrs-2.17/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["data/fivethirtyeight_election_deniers.csv","data/fivethirtyeight_partisan_lean_DISTRICTS.csv","data/fivethirtyeight_partisan_lean_STATES.csv","data/urbanization-index-2022.csv","data/urbanization-state.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-1-2.png","index_files/figure-html5/unnamed-chunk-1-3.png","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-3-2.png","index_files/figure-html5/unnamed-chunk-3-3.png","index_files/figure-html5/unnamed-chunk-3-4.png","index_files/header-attrs-2.14/header-attrs.js","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.25/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -227,9 +227,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     display: none !important;
   }
 
+  hr.section-separator {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 0px;
+  }
+
+
+  d-byline {
+    border-top: none;
+  }
+
   d-article {
     padding-top: 2.5rem;
     padding-bottom: 30px;
+    border-top: none;
   }
 
   d-appendix {
@@ -324,6 +336,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   d-article div.sourceCode pre {
     padding-left: 18px;
     font-size: 14px;
+  }
+
+  /* tweak for Pandoc numbered line within distill */
+  d-article pre.numberSource code > span {
+      left: -2em;
   }
 
   d-article pre {
@@ -1085,6 +1102,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     // create d-title
     $('.d-title').changeElementType('d-title');
 
+    // separator
+    var separator = '<hr class="section-separator" style="clear: both"/>';
+    // prepend separator above appendix
+    $('.d-byline').before(separator);
+    $('.d-article').before(separator);
+
     // create d-byline
     var byline = $('<d-byline></d-byline>');
     $('.d-byline').replaceWith(byline);
@@ -1162,8 +1185,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     $('.distill-force-highlighting-css').parent().remove();
 
     // remove empty line numbers inserted by pandoc when using a
-    // custom syntax highlighting theme
-    $('code.sourceCode a:empty').remove();
+    // custom syntax highlighting theme, except when numbering line
+    // in code chunk
+    $('pre:not(.numberLines) code.sourceCode a:empty').remove();
 
     // load distill framework
     load_distill_framework();
@@ -1189,12 +1213,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       // add orcid ids
       $('.authors-affiliations').find('.author').each(function(i, el) {
         var orcid_id = front_matter.authors[i].orcidID;
+        var author_name = front_matter.authors[i].author
         if (orcid_id) {
           var a = $('<a></a>');
           a.attr('href', 'https://orcid.org/' + orcid_id);
           var img = $('<img></img>');
           img.addClass('orcid-id');
-          img.attr('alt', 'ORCID ID');
+          img.attr('alt', author_name ? 'ORCID ID for ' + author_name : 'ORCID ID');
           img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
           a.append(img);
           $(this).append(a);
@@ -1472,7 +1497,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="index_files/header-attrs-2.14/header-attrs.js"></script>
+  <script src="index_files/header-attrs-2.25/header-attrs.js"></script>
   <script src="index_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="index_files/popper-2.6.0/popper.min.js"></script>
   <link href="index_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -1493,7 +1518,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Gov 50 Final Project","description":"Let's see where this goes","authors":[{"author":"David Hacker","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}]}
+{"title":"Gov 50 Final Project","description":"An Analysis of Urbanization and Election Denial in the United States","authors":[{"author":"David Hacker","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1504,9 +1529,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <div class="d-title">
 <h1>Gov 50 Final Project</h1>
+
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p>Let’s see where this goes</p>
+<p>An Analysis of Urbanization and Election Denial in the United States</p>
 </div>
 
 <div class="d-byline">
@@ -1517,10 +1543,231 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<h2 id="project-thoughts">Project thoughts</h2>
-<p>I am interested in exploring data related to voting patterns, voter registration,
-the electoral college, voter id; I’m not sure exactly but you can probably see a pattern here.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h2 id="introduction">Introduction</h2>
+<p>In April 2020, FiveThirtyEight published an <a href="https://fivethirtyeight.com/features/how-urban-or-rural-is-your-state-and-what-does-that-mean-for-the-2020-election/">article</a> analyzing how urbanization in a state might be able to predict its vote in the 2020 presidential election. The article makes the claim that high urbanization is a good predictor for voting Democratic, and that “these patterns hold up even after accounting for other important political predictors like race or gender.” After Joe Biden’s victory, Donald Trump began to make unprecedented and baseless claims that the election had been fradulent and stolen. Shockingly, many prominent figures in the Republican party embraced this position, and in 2022, FiveThirtyEight published an <a href="https://projects.fivethirtyeight.com/republicans-trump-election-fraud/">additional report</a> on which states had the most election deniers on the midterm ballots. A natural question to ask is whether the level of urbanization in a state or district could predict whether the Republican party nominated an election denier in 2022: since notions like election denial evoke thoughts of big, scary government, and people disconnected from government processes, I</p>
+<h2 id="data">Data</h2>
+This analysis uses three different datasets, all of which were compiled by FiveThirtyEight. The first is a <a href="https://github.com/fivethirtyeight/data/tree/master/urbanization-index">dataset</a> of urbanization indices for states and districts, computed by FiveThirtyEight from Census Data. FiveThirtyEight computes urbanization index as the average natural logarithm of the number of people living in a five mile radius of each census tract. Next, the distr<br />
+
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://usmap.dev'>usmap</a></span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>urb_index</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>'data/urbanization-state.csv'</span><span class='op'>)</span></span>
+<span><span class='va'>district_urb_index</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>'data/urbanization-index-2022.csv'</span><span class='op'>)</span></span>
+<span><span class='va'>election_deniers</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>'data/fivethirtyeight_election_deniers.csv'</span><span class='op'>)</span></span>
+<span><span class='va'>partisan_lean</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>'data/fivethirtyeight_partisan_lean_STATES.csv'</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span><span class='st'>"lean"</span> <span class='op'>=</span> <span class='st'>"2022"</span><span class='op'>)</span></span>
+<span><span class='va'>partisan_lean_districts</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>'data/fivethirtyeight_partisan_lean_DISTRICTS.csv'</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span><span class='st'>"distlean"</span> <span class='op'>=</span> <span class='st'>"2022"</span>, <span class='st'>"ezcode"</span> <span class='op'>=</span> <span class='st'>"district"</span><span class='op'>)</span></span>
+<span><span class='va'>states_with_statewide_deniers</span> <span class='op'>&lt;-</span> <span class='va'>election_deniers</span> <span class='op'>|&gt;</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>State</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>Office</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'Senator'</span>, <span class='st'>'Governor'</span>, <span class='st'>'Secretary of state'</span>, <span class='st'>'Attorney general'</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>Stance</span> <span class='op'>==</span> <span class='st'>"Fully denied"</span><span class='op'>)</span> <span class='op'>|&gt;</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span><span class='va'>urb_index</span> <span class='op'>&lt;-</span> <span class='va'>urb_index</span> <span class='op'>|&gt;</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span></span>
+<span>  statewide_denier <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>state</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='va'>states_with_statewide_deniers</span><span class='op'>$</span><span class='va'>State</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span></span>
+<span><span class='op'>)</span></span>
+<span><span class='va'>election_deniers</span> <span class='op'>&lt;-</span> <span class='va'>election_deniers</span> <span class='op'>|&gt;</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>numeric_denial <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span></span>
+<span>  <span class='va'>Stance</span> <span class='op'>==</span> <span class='st'>"Fully denied"</span> <span class='op'>~</span> <span class='fl'>2</span>,</span>
+<span>  <span class='va'>Stance</span> <span class='op'>==</span> <span class='st'>"Raised questions"</span> <span class='op'>~</span> <span class='fl'>1</span>,</span>
+<span>  <span class='va'>Stance</span> <span class='op'>==</span> <span class='st'>"Accepted with reservations"</span> <span class='op'>~</span> <span class='op'>-</span><span class='fl'>1</span>,</span>
+<span>  <span class='va'>Stance</span> <span class='op'>==</span> <span class='st'>"Fully accepted"</span> <span class='op'>~</span> <span class='op'>-</span><span class='fl'>2</span>,</span>
+<span>  <span class='cn'>T</span> <span class='op'>~</span> <span class='fl'>0</span></span>
+<span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>election_deniers</span> <span class='op'>&lt;-</span> <span class='va'>election_deniers</span> <span class='op'>|&gt;</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>flat_denial <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span></span>
+<span>  <span class='va'>Stance</span> <span class='op'>==</span> <span class='st'>"Fully denied"</span> <span class='op'>~</span> <span class='fl'>1</span>,</span>
+<span>  <span class='cn'>T</span> <span class='op'>~</span> <span class='fl'>0</span></span>
+<span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>election_deniers</span> <span class='op'>&lt;-</span> <span class='va'>election_deniers</span> <span class='op'>|&gt;</span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>short_state <span class='op'>=</span> <span class='va'>state.abb</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/match.html'>match</a></span><span class='op'>(</span><span class='va'>State</span>,<span class='va'>state.name</span><span class='op'>)</span><span class='op'>]</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>ezcode <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>short_state</span>, <span class='st'>'-'</span>, <span class='va'>District</span>, sep<span class='op'>=</span><span class='st'>""</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>stcd <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='va'>District</span><span class='op'>)</span> <span class='op'>&lt;</span> <span class='fl'>10</span>, </span>
+<span>                        <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>short_state</span>, <span class='st'>'-0'</span>, <span class='va'>District</span>, sep<span class='op'>=</span><span class='st'>""</span><span class='op'>)</span>,</span>
+<span>                        <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>short_state</span>, <span class='st'>'-'</span>, <span class='va'>District</span>, sep<span class='op'>=</span><span class='st'>""</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> </span>
+<span><span class='va'>by_district</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/merge.html'>merge</a></span><span class='op'>(</span><span class='va'>election_deniers</span>, <span class='va'>district_urb_index</span>, by<span class='op'>=</span><span class='st'>"stcd"</span><span class='op'>)</span></span>
+<span><span class='va'>by_district</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/merge.html'>merge</a></span><span class='op'>(</span><span class='va'>by_district</span>, <span class='va'>partisan_lean_districts</span>, by<span class='op'>=</span><span class='st'>"ezcode"</span><span class='op'>)</span></span>
+<span><span class='va'>urb_index</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/merge.html'>merge</a></span><span class='op'>(</span><span class='va'>urb_index</span>, <span class='va'>partisan_lean</span>, by<span class='op'>=</span><span class='st'>"state"</span><span class='op'>)</span></span>
+<span><span class='va'>statewide_data</span> <span class='op'>&lt;-</span> <span class='va'>urb_index</span></span>
+<span><span class='va'>district_data</span> <span class='op'>&lt;-</span> <span class='va'>by_district</span></span>
+<span></span>
+<span><span class='fu'><a href='https://rdrr.io/pkg/usmap/man/plot_usmap.html'>plot_usmap</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>statewide_data</span>, values <span class='op'>=</span> <span class='st'>"statewide_denier"</span>, color <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_colour_continuous.html'>scale_fill_continuous</a></span><span class='op'>(</span></span>
+<span>    low <span class='op'>=</span> <span class='st'>"white"</span>, high <span class='op'>=</span> <span class='st'>"red"</span>, name <span class='op'>=</span> <span class='st'>"Population (2015)"</span>, label <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='va'><a href='https://scales.r-lib.org/reference/comma.html'>comma</a></span></span>
+<span>  <span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"right"</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>statewide_denier</span> <span class='op'>~</span> <span class='va'>urbanindex</span>, data<span class='op'>=</span><span class='va'>statewide_data</span><span class='op'>)</span> <span class='op'>|&gt;</span> <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = statewide_denier ~ urbanindex, data = statewide_data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.4245 -0.3950 -0.3768  0.6019  0.6319 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)  0.27834    0.65118   0.427    0.671
+urbanindex   0.01087    0.06185   0.176    0.861
+
+Residual standard error: 0.4979 on 49 degrees of freedom
+Multiple R-squared:  0.0006303, Adjusted R-squared:  -0.01976 
+F-statistic: 0.03091 on 1 and 49 DF,  p-value: 0.8612</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>statewide_denier</span> <span class='op'>~</span> <span class='va'>urbanindex</span> <span class='op'>+</span> <span class='va'>lean</span>, data<span class='op'>=</span><span class='va'>statewide_data</span><span class='op'>)</span> <span class='op'>|&gt;</span> <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = statewide_denier ~ urbanindex + lean, data = statewide_data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.4490 -0.3975 -0.3610  0.5879  0.7288 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept) -0.006675   0.943491  -0.007    0.994
+urbanindex   0.037175   0.088308   0.421    0.676
+lean        -0.001830   0.004350  -0.421    0.676
+
+Residual standard error: 0.5022 on 48 degrees of freedom
+Multiple R-squared:  0.004302,  Adjusted R-squared:  -0.03719 
+F-statistic: 0.1037 on 2 and 48 DF,  p-value: 0.9017</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>numeric_denial</span> <span class='op'>~</span> <span class='va'>urbanindex</span>, data<span class='op'>=</span><span class='va'>district_data</span><span class='op'>)</span> <span class='op'>|&gt;</span> <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = numeric_denial ~ urbanindex, data = district_data)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-2.766 -1.287  0.168  1.337  1.954 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  2.06737    0.58775   3.517 0.000484 ***
+urbanindex  -0.13801    0.05231  -2.638 0.008648 ** 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 1.416 on 415 degrees of freedom
+Multiple R-squared:  0.01649,   Adjusted R-squared:  0.01413 
+F-statistic:  6.96 on 1 and 415 DF,  p-value: 0.008648</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>numeric_denial</span> <span class='op'>~</span> <span class='va'>urbanindex</span> <span class='op'>+</span> <span class='va'>distlean</span>, data<span class='op'>=</span><span class='va'>district_data</span><span class='op'>)</span> <span class='op'>|&gt;</span> <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = numeric_denial ~ urbanindex + distlean, data = district_data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.9150 -1.2179  0.1058  1.2061  2.1332 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)  0.015571   0.894601   0.017  0.98612   
+urbanindex   0.045246   0.079785   0.567  0.57095   
+distlean    -0.010374   0.003435  -3.020  0.00268 **
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 1.402 on 414 degrees of freedom
+Multiple R-squared:  0.0377,    Adjusted R-squared:  0.03305 
+F-statistic: 8.109 on 2 and 414 DF,  p-value: 0.0003511</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>flat_denial</span> <span class='op'>~</span> <span class='va'>urbanindex</span>, data<span class='op'>=</span><span class='va'>district_data</span><span class='op'>)</span> <span class='op'>|&gt;</span> <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = flat_denial ~ urbanindex, data = district_data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.6377 -0.4020 -0.2887  0.5176  0.8806 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.30892    0.19912   6.574 1.48e-10 ***
+urbanindex  -0.08121    0.01772  -4.582 6.09e-06 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.4797 on 415 degrees of freedom
+Multiple R-squared:  0.04816,   Adjusted R-squared:  0.04587 
+F-statistic:    21 on 1 and 415 DF,  p-value: 6.091e-06</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>flat_denial</span> <span class='op'>~</span> <span class='va'>urbanindex</span> <span class='op'>+</span> <span class='va'>distlean</span>, data<span class='op'>=</span><span class='va'>district_data</span><span class='op'>)</span> <span class='op'>|&gt;</span> <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = flat_denial ~ urbanindex + distlean, data = district_data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.6855 -0.3778 -0.1744  0.4251  1.0141 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -0.072960   0.293046  -0.249    0.804    
+urbanindex   0.042215   0.026135   1.615    0.107    
+distlean    -0.006987   0.001125  -6.210 1.29e-09 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.4593 on 414 degrees of freedom
+Multiple R-squared:  0.1293,    Adjusted R-squared:  0.1251 
+F-statistic: 30.73 on 2 and 414 DF,  p-value: 3.6e-13</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>scatter1</span> <span class='op'>&lt;-</span> <span class='va'>statewide_data</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>urbanindex</span>, y <span class='op'>=</span> <span class='va'>statewide_denier</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method<span class='op'>=</span><span class='st'>'lm'</span>, formula<span class='op'>=</span> <span class='va'>y</span><span class='op'>~</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    x <span class='op'>=</span> <span class='st'>"Unemployment Rates in WV Counties (2018)"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='st'>"Percentage Population Changes in WV Counties (2019)"</span>,</span>
+<span>    title <span class='op'>=</span> <span class='st'>"West Virginia County Population Changes in 2019\nvs. West Virginia County Unemployment Rates in 2018"</span>,</span>
+<span>    caption <span class='op'>=</span> <span class='st'>"Sources: United States Census Bureau Annual Resident\nPopulation Estimates for States and Counties (2021);\nAppalachian Regional Commission (2022)"</span></span>
+<span>  <span class='op'>)</span></span>
+<span><span class='va'>scatter2</span> <span class='op'>&lt;-</span> <span class='va'>district_data</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>urbanindex</span>, y <span class='op'>=</span> <span class='va'>numeric_denial</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method<span class='op'>=</span><span class='st'>'lm'</span>, formula<span class='op'>=</span> <span class='va'>y</span><span class='op'>~</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    x <span class='op'>=</span> <span class='st'>"Unemployment Rates in WV Counties (2018)"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='st'>"Percentage Population Changes in WV Counties (2019)"</span>,</span>
+<span>    title <span class='op'>=</span> <span class='st'>"West Virginia County Population Changes in 2019\nvs. West Virginia County Unemployment Rates in 2018"</span>,</span>
+<span>    caption <span class='op'>=</span> <span class='st'>"Sources: United States Census Bureau Annual Resident\nPopulation Estimates for States and Counties (2021);\nAppalachian Regional Commission (2022)"</span></span>
+<span><span class='op'>)</span></span>
+<span><span class='va'>scatter3</span> <span class='op'>&lt;-</span> <span class='va'>district_data</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>urbanindex</span>, y <span class='op'>=</span> <span class='va'>flat_denial</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method<span class='op'>=</span><span class='st'>'lm'</span>, formula<span class='op'>=</span> <span class='va'>y</span><span class='op'>~</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    x <span class='op'>=</span> <span class='st'>"Unemployment Rates in WV Counties (2018)"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='st'>"Percentage Population Changes in WV Counties (2019)"</span>,</span>
+<span>    title <span class='op'>=</span> <span class='st'>"West Virginia County Population Changes in 2019\nvs. West Virginia County Unemployment Rates in 2018"</span>,</span>
+<span>    caption <span class='op'>=</span> <span class='st'>"Sources: United States Census Bureau Annual Resident\nPopulation Estimates for States and Counties (2021);\nAppalachian Regional Commission (2022)"</span></span>
+<span><span class='op'>)</span></span>
+<span><span class='va'>scatter1</span></span></code></pre>
+</div>
+<img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>scatter2</span></span></code></pre>
+</div>
+<img src="index_files/figure-html5/unnamed-chunk-3-2.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>scatter3</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-3-3.png" width="624" /></p>
+</div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
